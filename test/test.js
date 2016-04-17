@@ -1,24 +1,16 @@
 var expect = require('expect.js');
 var mongodb = require('mongodb');
-var ShareDbMongo = require('./index');
-var assert = require('assert');
+var ShareDbMongo = require('../index');
+
+var mongoUrl = process.env.TEST_MONGO_URL || 'mongodb://localhost:27017/test';
 
 function create(callback) {
-  mongodb.connect('mongodb://localhost:27017/test', function(err, mongo) {
+  mongodb.connect(mongoUrl, function(err, mongo) {
     if (err) throw err;
-    clear(mongo, function(err) {
+    mongo.dropDatabase(function(err) {
       if (err) throw err;
       var db = ShareDbMongo({mongo: mongo});
       callback(null, db, mongo);
-    });
-  });
-}
-function clear(mongo, callback) {
-  // Intentionally ignore errors, since drop returns an error if the
-  // collection doesn't exist yet
-  mongo.collection('testcollection').drop(function(err) {
-    mongo.collection('ops_testcollection').drop(function(err) {
-      callback();
     });
   });
 }
@@ -45,10 +37,12 @@ describe('mongo db', function() {
       var mongo = this.mongo;
       this.db.commit('testcollection', 'foo', {v: 0, create: {}}, {}, function(err) {
         if (err) throw err;
-        mongo.collection('ops_testcollection').indexInformation(function(err, indexes) {
+        mongo.collection('o_testcollection').indexInformation(function(err, indexes) {
           if (err) throw err;
           // Index for getting document(s) ops
           expect(indexes['d_1_v_1']).ok();
+          // Index for checking committed op(s) by src and seq
+          expect(indexes['src_1_seq_1_v_1']).ok();
           done()
         });
       });
