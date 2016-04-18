@@ -840,6 +840,10 @@ ShareDbMongo.prototype.checkQuery = function(query) {
 };
 
 function normalizeQuery(inputQuery) {
+  if (Array.isArray(inputQuery)) {
+    inputQuery = { _id: { $in: inputQuery } };
+  }
+
   // Box queries inside of a $query and clone so that we know where to look
   // for selctors and can modify them without affecting the original object
   var query;
