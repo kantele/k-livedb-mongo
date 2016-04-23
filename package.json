@@ -1,24 +1,24 @@
 {
-  "name": "k-livedb-mongo",
-  "version": "0.5.4",
-  "description": "MongoDB database adapter for livedb",
-  "main": "index.js",
-  "dependencies": {
-    "async": "*",
-    "mongodb": "*",
-    "k-sync": "*"
-  },
-  "devDependencies": {
-    "coveralls": "^2.11.8",
-    "expect.js": "^0.3.1",
-    "istanbul": "^0.4.2",
-    "mocha": "^2.3.3"
-  },
-  "scripts": {
-    "test": "node_modules/.bin/mocha",
-    "test-cover": "node_modules/istanbul/lib/cli.js cover node_modules/mocha/bin/_mocha"
-  },
-  "repository": "git://github.com/kantele/k-livedb-mongo.git",
-  "author": "Joseph Gentle and Nate Smith",
-  "license": "MIT"
+	"name": "k-livedb-mongo",
+	"version": "0.5.5",
+	"description": "MongoDB database adapter for livedb",
+	"main": "index.js",
+	"dependencies": {
+		"async": "*",
+		"mongodb": "*",
+		"k-sync": "*"
+	},
+	"devDependencies": {
+		"coveralls": "^2.11.8",
+		"expect.js": "^0.3.1",
+		"istanbul": "^0.4.2",
+		"mocha": "^2.3.3"
+	},
+	"scripts": {
+		"test": "node_modules/.bin/mocha",
+		"test-cover": "node_modules/istanbul/lib/cli.js cover node_modules/mocha/bin/_mocha"
+	},
+	"repository": "git://github.com/kantele/k-livedb-mongo.git",
+	"author": "Joseph Gentle and Nate Smith",
+	"license": "MIT"
 }
